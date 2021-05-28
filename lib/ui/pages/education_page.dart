@@ -7,72 +7,63 @@ class EducationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Stack(
-              children: [
-                Container(
-                  color: Colors.purple.withOpacity(0.2),
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  margin: EdgeInsets.only(top: 160),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-                    color: Colors.white,
-                  ),
-                ),
-                SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.fromLTRB(5, 2, 5, 2),
-                              child: InkWell(
-                                child: Icon(Icons.arrow_back, size: 24,),
-                                onTap: () { Navigator.pop(context); },
-                              ),
-                            )
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 13),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              SizedBox(height: 10,),
-                              Text("Education", style: titleTextStyle.copyWith(fontSize: 22, fontWeight: FontWeight.w500), textAlign: TextAlign.center,),
-                              SizedBox(height: 10,),
-                              Text('Education, Licenses & Certifications', style: valueTextStyle, textAlign: TextAlign.center,),
-                              SizedBox(height: 60,),
-                              // Education info
-                              Text('Education', style: labelTextStyle),
-                              SizedBox(height: 10,),
-                              ..._getEducationList(),
-                              SizedBox(height: 20,),
-                              // Licenses info
-                              Text('Licenses & Certifications', style: labelTextStyle),
-                              SizedBox(height: 10,),
-                              ..._getLicensesList(),
-                            ],
-                          ),
-                        )
-                      ]
-                    ),
-                  )
-                ),
-              ]
+      body: Stack(
+        children: <Widget>[
+          Container(
+            color: Colors.purple.withOpacity(0.2),
+            width: MediaQuery.of(context).size.width,
+            height: 200,
+          ),
+          // Base Round Container
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            margin: EdgeInsets.only(top: 160),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20)),
+              color: Colors.white,
             ),
-          ],
-        ),
+          ),
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: new AppBar(
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.black),
+                onPressed: () => Navigator.pop(context),
+              ),
+              backgroundColor: Colors.transparent,
+              elevation: 0.0,
+            ),
+            body: new SingleChildScrollView(
+              child: Column(children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text("Education", style: titleTextStyle.copyWith(fontSize: 22, fontWeight: FontWeight.w500), textAlign: TextAlign.center,),
+                      SizedBox(height: 10,),
+                      Text('Education, Licenses & Certifications', style: valueTextStyle, textAlign: TextAlign.center,),
+                      SizedBox(height: 40,),
+                      // Education info
+                      Text('Education', style: labelTextStyle),
+                      SizedBox(height: 10,),
+                      ..._getEducationList(),
+                      SizedBox(height: 20,),
+                      // Licenses info
+                      Text('Licenses & Certifications', style: labelTextStyle),
+                      SizedBox(height: 10,),
+                      ..._getLicensesList(),
+                      SizedBox(height: 10,),
+                    ],
+                  ),
+                )
+              ]),
+            ),
+          ),
+        ],
       ),
     );
   }
