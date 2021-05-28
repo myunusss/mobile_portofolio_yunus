@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portofolio_yunus/theme.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutPage extends StatelessWidget {
   @override
@@ -75,7 +76,17 @@ class AboutPage extends StatelessWidget {
                               SizedBox(height: 10,),
                               Text('Phone', style: labelTextStyle),
                               SizedBox(height: 10,),
-                              Text('0858 7132 xxxx', style: valueTextStyle),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text('0858 7132 xxxx', style: valueTextStyle),
+                                  SizedBox(width: 10,),
+                                  InkWell(
+                                    onTap: () => _launchURL(context),
+                                    child: Image.asset('lib/assets/images/whatsapp.png', width: 26, height: 26, fit: BoxFit.cover,),
+                                  )
+                                ],
+                              )
                             ],
                           ),
                         )
@@ -90,4 +101,8 @@ class AboutPage extends StatelessWidget {
       ),
     );
   }
+
+  void _launchURL(context) async => await canLaunch('whatsapp://send?phone=085871321037') ? await launch('whatsapp://send?phone=085871321037') : ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    content: Text("Cannot open whatsapp://send?phone=085871321037"),
+  ));
 }
